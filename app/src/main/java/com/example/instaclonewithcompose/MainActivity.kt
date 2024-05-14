@@ -47,7 +47,7 @@ fun AppController(sharedPreferences: SharedPreferences) {
     }
     
     fun navigateToLogin(navController: NavHostController) {
-        navController.navigate(NavigationItem.Login.route + "/rajat.arora@example.com")
+        navController.navigate(NavigationItem.Login.route)
     }
     
     val navController = rememberNavController()
@@ -60,14 +60,7 @@ fun AppController(sharedPreferences: SharedPreferences) {
                 navigateToLogin(navController)
             })
         }
-        composable(NavigationItem.Login.route + "/{$EMAIL}", arguments = listOf(
-            navArgument(name = EMAIL) {
-                type = NavType.StringType
-            }
-        )) { it ->
-            it.arguments?.getString(EMAIL)?.let { email ->
-                Log.e("EMAIL : ", email)
-            }
+        composable(NavigationItem.Login.route) {
             LoginScreen(onLoginSuccessful = {
                 navController.navigate(NavigationItem.Home.route) {
                     popUpTo(navController.graph.id) {
